@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fake Currency Prediction</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+
+    <style>
+      form {
+        margin: 2rem auto;
+        max-width: 30rem;
+        padding: 2rem;
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        background-color: #f8f9fa;
+      }
+      .card {
+        margin: 2rem auto;
+        max-width: 30rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      }
+      body {
+        background-image: url("https://cdn.theculturetrip.com/wp-content/uploads/2018/05/shutterstock_1097144396.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <i
+      ><h1
+        class="text-center mt-5 mb-4"
+        style="
+          font-variant: small-caps;
+          text-decoration: underline;
+          display: inline;
+          background-color: #ebcf5f9f;
+          margin-left: 33.5%;
+        "
+      >
+        Banknote Prediction
+      </h1></i
+    >
+    <div class="container">
+      <form action="/predict" method="post">
+        <div class="form-group">
+          <label for="var">Variance:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="var"
+            name="var"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="skew">Skewness:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="skew"
+            name="skew"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="curt">Curtosis:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="curt"
+            name="curt"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="entr">Entropy:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="entr"
+            name="entr"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="model">Choose Model:</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="model"
+              id="model1"
+              value="Logistic Regression"
+              checked
+            />
+            <label class="form-check-label" for="model1">
+              Logistic Regression
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="model"
+              id="model2"
+              value="Support Vector Machine"
+            />
+            <label class="form-check-label" for="model2">
+              Support Vector Machine
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="model"
+              id="model3"
+              value="KNN"
+            />
+            <label class="form-check-label" for="model3"> KNN </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="model"
+              id="model4"
+              value="DTree"
+            />
+            <label class="form-check-label" for="model4"> Decision Tree </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict</button>
+      </form>
+      {% if prediction is not none %}
+      <div class="card">
+        <div class="card-header">
+          {% if prediction == 0 %}
+          <h2 class="text-center">Prediction: Correct Note</h2>
+          <h3 style="color: green; text-align: center">
+            Its a Fair currency, can accept...
+          </h3>
+          {% else %}
+          <h2 class="text-center">Prediction: Fake Note</h2>
+          <h3 style="color: red; text-align: center">
+            Warning! its a Fake currency, don't accept!
+          </h3>
+          {% endif %}
+        </div>
+        <!-- <div class="card-body">
+          <h3 class="text-center">Probabilities:</h3>
+          <p class="text-center">{{ probabilities }}</p>
+        </div> -->
+      </div>
+      {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
